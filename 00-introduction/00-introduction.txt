@@ -1,0 +1,14 @@
+========================================================================
+INTRODUCTION
+========================================================================
+
+NB TYPESCRIPT COMPILES TO JAVASCRIPT FILES
+
+1. To install Typescript:
+
+    npm install -g typescript
+
+2. To compile and run a single Typescript file in this project:
+
+    tsc my_file.js
+    node my_file.js

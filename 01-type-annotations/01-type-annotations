@@ -1,0 +1,42 @@
+============================================================================================
+TYPE ANNOTATIONS
+============================================================================================
+
+1. What are type annotations
+
+    - type annotations are labels which indicate the type of a variable
+    - once a type is assigned to a variable 'v' the values assigned to 'v' must be of the same type
+    - the assignment on the 2nd line below is ILLEGAL
+
+        let str_var:string = "hello world"; let num_var:number = 99; let bool_var:boolean = false;
+        str_var=101;
+
+
+2. What is type inference
+
+    - type inference means typescript can automatically detect variable types if a value is assigned
+    - notice the lack of type labels
+    - again, the assignment on the 2nd line is ILLEGAL
+
+        let str_var_inferred = "hello world"; let num_var_inferred = 99; let bool_var_inferred = false;
+        bool_var_inferred="Foo-bool";
+
+
+3. What is the `any` type annotation
+
+    - the 'any' type means any type can be assigned to a variable
+    - notice the assignment on the second line is now made LEGAL
+
+        let any_var:any = "I am flexible";
+        any_var = false;
+
+
+4. In what circumstances may you not want to rely on type inference
+
+    - you cannot rely on type inference when using delayed initialisation, as typescript infers 'any' as the type of v
+    - in the example below, even though we intend for the var to be a string, it is changed to a boolean on line 3
+    - thus, we should always type label any such variables
+
+        let delayed_var;
+        delayed_var = Math.random() < 0.5 ? "Less" : "More";
+        delayed_var = false;

@@ -1,0 +1,58 @@
+============================================================================================
+FUNCTIONS
+============================================================================================
+
+1. How do you add type annotations to functions
+
+    - use labels
+    - if you do not use labels, typescript will infer "any"
+    - the code below illustrates both standard and arrow functions
+
+        function greetUser(name:string, age:number) {return `${name}:${age}`;}
+        let greetUserArrow = (name:string, age:number) => `${name}:${age}`;
+
+
+2. Where does type inference occur with regard to functions
+
+    - return values will be inferred, if no return type label is added
+    - parameter types will be inferred as 'any', if no return type label is added
+    - types of default values obviously have their type inferred
+
+
+3. How do you type default values
+
+    - they are automatically inferred if not set
+    - otherwise, make sure to put the label BEFORE the assignment operator
+
+        let myFnWithDefault = (height:number, weight:number =99) => height * weight;
+
+        let myFnWithDefaultNoType = (height:number, weight =99) => {
+            // weight = false; => this is illegal - weight was inferred to be a number
+        }
+
+
+4. How do you type return values - what if the function does not return a value
+
+    - return types can be inferred or specified explicitly
+
+        function add(x:number, y:number):number{
+            return x * y;
+        }
+        function addNoType(x:number, y:number){
+            return x * y;
+        }
+        let my_var = addNoType(9,1);
+
+            // my_var = false; => THIS IS ILLEGAL AS the type number was inferred
+
+
+5. What is the use of the 'never' type
+
+    - the NEVER type is used when a method never returns a type e.g. an infinite while loop or a method that throws an exception
+
+        function daemon() : never{
+            while(true) {}
+        }
+        function exThrower() : never {
+            throw new Error("Uh oh");
+        }
