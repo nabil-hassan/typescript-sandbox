@@ -1,0 +1,82 @@
+============================================================
+OBJECT TYPES
+============================================================
+
+1. What are the two approaches to defining object types
+
+    - the first approach is to inline the object type
+    - the second approach is to explicitly define the object type using the 'type' keyword
+
+
+2. Show both in the context of typing an object, a function parameter and a function return value
+
+    - examples below
+
+        // INLINE
+        let my_cat : {"name" : String, "age" : number} = {"name" : "mittens", "age" : 5};
+
+        function calculateSize(thing : {"weight" : number, "height" : number}) {
+            return thing.height * thing.weight;
+        }
+
+        function buildDatasource(url: string, connectionTimeoutMs: number) : {"id" : number, "url" : string} {
+            return {"id" : 101, "url" : url};
+        }
+
+        // EXPLICIT
+        type Cat = {"name" : string,  "age" : number }
+
+        let my_other_cat : Cat = {"name" : "paws", "age" : 5};
+
+        function groomCat(cat : Cat) {}
+        groomCat({"name" : "sprinkles", "age" : 4});
+
+
+3. Illustrate nested object types
+
+    - simply done as below
+
+        // nested objects can be used on inline or defined types
+        type Account = {
+            "id" : number,
+            "customer" : {
+                "id" : number,
+                "name" : string
+            }
+        }
+
+        let new_account : Account = {"id" : 101, "customer" : {"id" : 99, "name" : "Lorem ipsum"}};
+
+4. What restrictions do object types enforce
+
+    - all fields must be specified unless marked as optional
+
+
+5. How can you make fields optional
+
+    - using the ?operator after the field name - here 'weight' is optional
+
+        let incomplete_object: {"color" : string, "weight"? : number} = {"color" : "red"}
+
+
+6. What is meant by a readonly type
+
+    - readonly fields are specified using the readonly operator before the field name
+    - if an object field is designated as readonly, it may only be specified when the object is instantiated
+    - typescript will not allow you to write to the field after instantiation
+
+        let protected_object : {readonly "id" : number } = {"id" : 99}
+            // => this is illegal: protected_object.id = 101;
+
+
+7. Exemplify how to use intersections
+
+    - intersections combine the fields of one or more types - either inline or explicitly defined
+
+        type Person = {"name" : string};
+        type Professional = {"occupation" : string}
+        type RetiredProfessional = Person & Professional & {"retirementYear" : number};
+
+        let retired_pro : RetiredProfessional = {name : "Bob the Builder", occupation: "builder", retirementYear: 2014};
+
+        console.log(retired_pro);
