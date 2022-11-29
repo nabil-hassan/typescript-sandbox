@@ -1,0 +1,113 @@
+===============================================================================================
+TS AND NODE PROJECT
+===============================================================================================
+
+This section details how to create a new project which incorporates Node and Typescript:
+
+Taken from:
+
+	prisma setup: https://www.prisma.io/docs/getting-started/quickstart
+	https://developer.okta.com/blog/2018/11/15/node-express-typescript
+
+The final output of this process is found in the project/ folder.
+
+	# build the project and project src folder
+	mkdir project
+	mkdir project/src
+	cd project
+
+	# initialise a new npm project and add development scope dependencies - this will produce a package,json
+	npm init -y
+	npm install typescript@4 ts-node @types/node --save-dev
+	npm install prisma --save-dev
+	npm install express@4
+	npm install --save-dev @types/node@18 @types/express@4
+
+	# modify package.json to include the following scripts
+	"scripts": {
+		"build": "tsc",
+		"prestart": "npm run build",
+		"start": "node .",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+
+	# also modify the package.json to point at the correct entrypoint (we will be compiling our js to /dist)
+	"main": "dist/index.js",
+
+	# create the tsconfig file
+	# this tells us the following:
+	#   - we include ts files found under src/
+	#   - we write compiled javascript to /out
+
+	cat > tsconfig.json << EOF
+	{
+		"compilerOptions": {
+			"module": "commonjs",
+			"esModuleInterop": true,
+			"target": "es6",
+			"noImplicitAny": true,
+			"moduleResolution": "node",
+			"sourceMap": true,
+			"outDir": "dist",
+			"baseUrl": ".",
+			"paths": {
+				"*": [
+					"node_modules/*"
+				]
+			}
+		},
+		"include": [
+			"src/**/*"
+		]
+	}
+    > EOF
+
+
+	# initialise Prisma - creates a new directory 'prisma/' containing a file 'schema.prisma'
+	npx prisma init --datasource-provider sqlite
+
+	# it also creates the file 'project/.env' which contains the DB url - here you can see it points to 'dev.db'
+	cat .env
+
+    DATABASE_URL="file:./dev.db
+
+	# add the following to the schema.prisma to model a single entity
+	cat >> prisma/schema.prisma << EOF
+	>
+    > model User {
+    >   id    Int     @id @default(autoincrement())
+    >   email String  @unique
+    >   name  String?
+    > }
+    >
+    > EOF
+
+    # now create and run a migration script for the model
+    npx prisma migrate dev --name init
+
+	# you can open prisma studio to inspect the database
+	npx prisma studio
+
+	# create a new file script.ts - this will contain example code to interact with Prisma and insert a new record
+	touch src/script.ts
+
+	# the contents of this file are specified within this repo and will simply insert a new user
+	# to run the script
+	npx ts-node src/script.ts
+
+	# check within the prisma studio that the record was created
+	npx prisma studio
+
+	# cool, now lets setup express and add an index page (check the folder for actual info)
+	touch src/index.ts
+
+    # try to build and run the code
+    npm run start
+
+
+
+
+
+
+
+

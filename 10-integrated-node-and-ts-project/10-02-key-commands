@@ -1,0 +1,12 @@
+===============================================================================================
+KEY COMMANDS
+===============================================================================================
+
+# run a standalone typescript file using ts-node
+npx ts-node script.ts
+
+# open prisma studio
+npx prisma studio
+
+# run a prisma migration
+npx prisma migrate dev --name init

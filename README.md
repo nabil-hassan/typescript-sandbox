@@ -6,15 +6,19 @@ The Typescript compiler is responsible for compiling your Typescript into Javasc
 
 ### To install Typescript:
 
-    npm install -g typescript
-    tsc --help
+```shell
+npm install -g typescript
+tsc --help
+```
 
 ### To compile and run a single Typescript file in this project:
 
 The majority of the code in this project is structured as individual Typescript files, which can be compiled and run independently:
 
-   tsc my_file.js
-   node my_file.js
+```shell
+tsc my_file.js
+node my_file.js
+```
 
 ### To run Typescript as part of a Node project.
 
