@@ -1,0 +1,18 @@
+============================================================
+ARRAY TYPES
+============================================================
+
+1. Illustrate the two approaches to typing arrays:
+
+	- approach one using square bracket notation:
+
+		let my_str_arr : string[] = ["Hi there", "Alice"];
+
+    - approach 2 using 'Array' keyword:
+
+    	let my_str_arr_2 : Array<string> = ["Alternative", "Syntax"]
+
+
+2. How do you define a multi-dimensional array:
+
+	let my_md_arr : number[][] = [[1,2,3], [4,5,6]];
