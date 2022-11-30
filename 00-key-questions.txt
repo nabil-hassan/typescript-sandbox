@@ -1,0 +1,18 @@
+============================================================
+KEY QUESTIONS
+============================================================
+
+1. How do you compile and run a single Typescript file
+
+    tsc file.ts     // compile file.ts to javascript
+    node file.js    // run resultant file
+
+2. How can you constrain a variable to a list of potential values
+
+    - create a literal union type
+
+        type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+3. What is a Tuple
+
+4. Illustrate how to numeric, string and heterogenous enums

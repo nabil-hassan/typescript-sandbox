@@ -1,0 +1,40 @@
+========================================================================================
+Union Types
+========================================================================================
+
+1. Illustrate how to use a union type for variables (both array and standard) - what does the array type mean
+
+    - union types separate multiple types using the pipe character
+    - for union array types, surround the types in parentheses
+
+        let my_var: string | number = 99;
+        // this array can contain strings OR numbers
+        let my_arr: (string | number)[] = ["9", 1, "2", 456];
+
+
+2. What is the common use of literal union types
+
+    - to constrain to a list of allowable values
+
+        type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+
+3. What is meant by type narrowing
+
+    - in some cases, Typescript will infer a function parameter type
+    - use type narrowing to be typesafe
+
+        // this is a function that accepts a string
+        function doStrFn(input: string)   {}
+
+        // this can accept a string OR a number
+        function doMultiFn(input: string | number) {
+            // this is invalid, as input could be a number or a string:
+            //    => doStrFn(input);
+
+            // thus use typeof to "narrow" the variable
+            if (typeof input === "string")
+                doStrFn(input);
+            else
+                console.log(input);
+        }

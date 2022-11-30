@@ -1,0 +1,44 @@
+========================================================================================
+Enums
+========================================================================================
+
+1. What are enums in Javascript - give a basic example
+
+    - an ordered set of constants which allow us to constrain to a set of values and assert against them
+
+    enum OrderStatus {
+        ACCEPTED, REJECTED, DELIVERED
+    }
+    let my_status: OrderStatus = OrderStatus.DELIVERED;
+
+
+2. Describe what enums actually represent
+
+    - a basic enum with no assignment is actually an ordered set of integers
+    - so in the code block above, ACCEPTED = 0, REJECTED = 2, DELIVERED = 3
+
+        console.assert(OrderStatus.DELIVERED === 2);
+
+
+3. How we can affect this
+
+    - we can assign specific numeric literals
+    - this will update the ordering of subsequent elements
+
+        enum AccountStatus {
+            CREATED, SUSPENDED=20, ACTIVE, DELETED
+        }
+        console.assert(AccountStatus.ACTIVE === 21)
+
+    - We can also assign String values
+    - If one enum value is assigned a String value, the next element MUST be assigned a String or numeric value
+    - Implicit numeric value assignment recommences if an explicit numeric value is assigned
+
+        enum GameStatus {
+            AWAITING, STARTED, HALF_TIME="45", FULL_TIME=90, CALLED_OFF
+        }
+        console.assert(GameStatus.HALF_TIME === "45");
+        console.assert(GameStatus.CALLED_OFF === 91);
+
+
+4.
