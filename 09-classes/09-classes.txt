@@ -1,0 +1,21 @@
+============================================================================================
+CLASSES
+============================================================================================
+
+Illustrate how to create a class:
+
+    - use the class keyword, assign a constructor, methods do not need the function keyword
+
+        class Person {
+            constructor(age,height,weight) {
+                this.age = age; this.height = height; this.weight = weight;
+            }
+            calculateScore() {
+                let {age,height,weight} = this;
+                return age * height * weight;
+            }
+        }
+
+        let person_example = new Person(10, 15, 67);
+        console.log(person_example.calculateScore());
+

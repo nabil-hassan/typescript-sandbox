@@ -1,0 +1,57 @@
+===============================================================
+THE TYPESCRIPT COMPILER
+===============================================================
+
+How do you initialise a Typescript project, compile a single file and set of files, and run them
+
+        tsc --init      // initialises a tsconfig.json file
+
+        tsc file.ts     // compile single file.ts to javascript
+        node file.js    // run resultant file
+
+        tsc             // compile all files as specified by the Typescript config (by default compiles all files in directory and sub-directries)
+
+
+How do you use watch mode and what is its purpose
+
+        - listens for changes in targeted source files and recompiles automatically on change
+
+        tsc --watch
+
+
+Which options exist to control the source files that should be compiled:
+
+        - the `files` option targets a fixed set of typescript files (but is rarely used)
+
+        - the `include` and `exclude` specify a set of glob patterns for included/excluded files
+        - by default `include` is set to `**` which compiles all typescript files
+        - by default `exclude` is set to exclude `node_modules` to avoid trying to recompile libraries which include ts
+        - be CAREFUL - if you override exclude you MUST remember to add back `node_modules`
+
+        - the `out` option indicates the directory to which typescript files should be written
+        - by default the compiled Javascript is placed inline with the corresponding source Typescript file
+        - typically we use `dist/` as the output directory
+
+        - nb the code block below is just for demonstration - we DON"t specify `include` and `files` at the same time
+
+            {
+              "files" : ["index.ts", "app.ts"],
+              "include": ["src/**/*"],
+              "exclude": ["src/**/dontCompileMe.ts", "node_modules"],
+              "compilerOptions" : {
+                  "outDir": "dist/",
+                  //...
+              }
+           }
+
+
+How do we control the target Javascript version
+
+    - using the `compilerOptions/target` property
+    - see: https://www.typescriptlang.org/tsconfig#target for a list of potential values
+
+
+What does `noEmitOnError` do
+
+    - if any Typescript file contains errors, no Javascript files will be emitted whatsoever
+

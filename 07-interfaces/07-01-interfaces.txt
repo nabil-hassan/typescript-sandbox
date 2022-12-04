@@ -1,0 +1,14 @@
+========================================================================================
+Interfaces
+========================================================================================
+
+List the differences between interfaces and types
+
+    - interfaces relate purely to objects and can define methods that should be implemented on the object
+    - types can constrain to a list of permissable values (via unions) or types (via intersections)
+    - interfaces use `extends` and `reopening` whereas types use intersections
+    - both interfaces and types can use optional and readonly properties
+
+    - see the `07-interfaces/code` folder for worked examples
+
+

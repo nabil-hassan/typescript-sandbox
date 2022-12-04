@@ -24,7 +24,7 @@ FUNCTIONS
     - they are automatically inferred if not set
     - otherwise, make sure to put the label BEFORE the assignment operator
 
-        let myFnWithDefault = (height:number, weight:number =99) => height * weight;
+        let myFnWithDefault = (height:number, weight:number =99): number => height * weight;
 
         let myFnWithDefaultNoType = (height:number, weight =99) => {
             // weight = false; => this is illegal - weight was inferred to be a number

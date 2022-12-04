@@ -1,0 +1,101 @@
+============================================================
+KEY QUESTIONS
+============================================================
+
+How do you initialise a Typescript project, compile a single file and set of files, and run them
+
+        tsc --init      // initialises a tsconfig.json file
+
+        tsc file.ts     // compile single file.ts to javascript
+        node file.js    // run resultant file
+
+        tsc             // compile all files as specified by the Typescript config (by default compiles all files in directory and sub-directries)
+
+
+Which options should you always specify in the Typescript config
+
+        use strict mode   // builds a stronger program e.g. does not allow use of implicit any etc
+        specify the target javascript version
+        include/exclude   // if you specify exclude, REMEMBER to add back 'node_modules' which is excluded by default
+
+
+What is watch mode:
+
+        - listens for changes in targeted source files and recompiles automatically on change
+
+        tsc --watch
+
+
+Which options exist to control the source files that should be compiled:
+
+        - the `files` option targets a fixed set of typescript files (but is rarely used)
+
+        - the `include` and `exclude` specify a set of glob patterns for included/excluded files
+        - by default `include` is set to `**` which compiles all typescript files
+        - by default `exclude` is set to exclude `node_modules` to avoid trying to recompile libraries which include ts
+        - be CAREFUL - if you override exclude you MUST remember to add back `node_modules`
+
+        - the `compilerOptions/outDir` option indicates the directory to which typescript files should be written
+        - by default the compiled Javascript is placed inline with the corresponding source Typescript file
+        - typically we use `dist/` as the output directory
+
+        - see tsconfig.json in 08-typescript-compiler folder for examples
+
+
+What is meant by type inference
+
+    - type inference means typescript can automatically detect types if a value is assigned to a variable
+    - also if a function always returns a specific type, or never returns a value (void)
+    - notice the lack of type labels
+    - again, the assignment on the 2nd line is ILLEGAL
+
+        let str_var_inferred = "hello world"; let num_var_inferred = 99; let bool_var_inferred = false;
+        bool_var_inferred="Foo-bool";
+
+
+What is the `any` type and when is it applied
+
+
+How can we make a field in a type definition optional/readonly - what is meant by readonly
+
+Write an example of a Typescript arrow function with parameters:
+
+        const my_typed_arrow_fun = (x:number, y:number) : number => x * y;
+
+
+How can you constrain a variable to a list of potential values
+
+    - create a literal union type
+
+        type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+What is a Tuple
+
+Illustrate how to write numeric, string and heterogenous enums
+
+
+Exemplify how to use intersections
+
+    - intersections combine the fields of one or more types - either inline or explicitly defined
+
+        type Person = {"name" : string};
+        type Professional = {"occupation" : string}
+        type RetiredProfessional = Person & Professional & {"retirementYear" : number};
+
+        let retired_pro : RetiredProfessional = {name : "Bob the Builder", occupation: "builder", retirementYear: 2014};
+
+        console.log(retired_pro);
+
+
+List the differences between interfaces and types
+
+    - interfaces relate purely to objects and can define methods that should be implemented on the object
+    - types can constrain to a list of permissable values (via unions) or types (via intersections)
+    - interfaces use `extends` and `reopening` whereas types use intersections
+    - both interfaces and types can use optional and readonly properties
+
+    - see the `07-interfaces/code` folder for worked examples
+
+
+
+

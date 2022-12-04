@@ -1,0 +1,27 @@
+========================================================================
+INTRODUCTION
+========================================================================
+
+NB TYPESCRIPT COMPILES TO JAVASCRIPT FILES
+
+To install Typescript:
+
+    npm install -g typescript
+    tsc --help
+
+To initialise a new tsconfig.json file
+
+    tsc --init
+
+To compile and run a single Typescript file in this project:
+
+    tsc my_file.js
+    node my_file.js
+
+To compile all source files targeted by tsconfig.json, just do:
+
+    tsc
+
+Typically it is quite useful to run a compile `watch` which will auto recompile on file changes
+
+    tsc --watch
