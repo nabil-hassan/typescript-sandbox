@@ -56,6 +56,11 @@ What is meant by type inference
 What is the `any` type and when is it applied
 
 
+What is the equivalent to the Java keyword: `final`
+
+    - readonly
+
+
 How can we make a field in a type definition optional/readonly - what is meant by readonly
 
 Write an example of a Typescript arrow function with parameters:
@@ -89,8 +94,9 @@ Exemplify how to use intersections
 
 List the differences between interfaces and types
 
-    - interfaces relate purely to objects and can define methods that should be implemented on the object
+    - interfaces relate purely to objects or classes and can define methods that should be implemented on the object/class
     - types can constrain to a list of permissable values (via unions) or types (via intersections)
+    - types cannot be used implemented by classes
     - interfaces use `extends` and `reopening` whereas types use intersections
     - both interfaces and types can use optional and readonly properties
 
