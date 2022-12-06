@@ -1,0 +1,72 @@
+========================================================================================
+Importing and Exporting
+========================================================================================
+
+> What is meant by global shared scope, and how can it causes issues
+
+    - Relevant when a Javascript or Typescript file does not explicitly export functions or variables.
+    - In this scenario any functions and variables that are defined are added to a "global shared scope"
+    - 2 files of this nature will share the same scope, meaning they cannot use the same name for a variable/function
+    - To resolve this issue either export members, or add  'export {}' to your file
+
+    - See 'file1.ts' and 'file2.ts', then 'file1-fixed.ts' and 'file2-fixed.ts' for examples
+
+
+> What is meant by a default export - how do you import such exports
+
+    - A file can export one default member
+    - This member can then be imported without the need for curly braces, and can be aliased without using 'as'
+
+        /*======= FILE 1 =======**/
+        export default function exportedFn() {
+            return "I was exported from another file.";
+        }
+
+        // you can also define the default export as a separate statement
+        // export default exportedFn();
+
+        /*======= FILE 2 =======**/
+        import exportedFn from "./exporter";
+        import ExF from "./exporter";          // this is an alias for the above function
+
+        console.log(exportedFn());
+        console.log(ExF());
+
+
+> How do you export and import multiple members
+
+    - The first file uses the 'export' statement before the members to export
+    - In the second file use the 'import' statement, with required members placed in curly braces
+    - You can alias imported members using the 'as' keyword
+
+        /*======= FILE 1 =======**/
+        export function exFn1()  { return "I am the first function to be exported."; }
+        export function exFn2()  { return "I am the second function to be exported."; }
+
+        export default exFn1();   // we can have a default export too
+
+        /*======= FILE 2 =======**/
+        import {exFn1, exFn2 as ExF2} from "./multi-exporter";
+
+        console.log(exFn1());
+        console.log(ExF2());
+
+
+> How do you import all members from a file
+
+    - Use import *
+
+        import * as foo from './otherClass';
+        foo.exportedFn()
+
+> How do you import methods from node_modules and other locations - which paths are scanned for imported members
+
+     - Node.JS automatically scans the 'node_modules' directory within the project root.
+     - Thus, you could use a relative path like: `import * as express from 'express/express.js'`
+
+     - You can also ask it to check additional directories using the NODE_PATH environment variable.
+     - N.B. directories must be separated via a colon e.g 'export NODE_PATH="/tmp/node1:/tmp/node2"'
+     - Again, you can use relative paths for any directories included in this variable
+     - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
+
+

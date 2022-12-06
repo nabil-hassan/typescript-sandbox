@@ -2,7 +2,11 @@
 KEY QUESTIONS
 ============================================================
 
-How do you initialise a Typescript project, compile a single file and set of files, and run them
+========================================================================================
+Typescript projects and compilation
+========================================================================================
+
+> How do you initialise a Typescript project, compile a single file and set of files, and run them
 
         tsc --init      // initialises a tsconfig.json file
 
@@ -12,21 +16,21 @@ How do you initialise a Typescript project, compile a single file and set of fil
         tsc             // compile all files as specified by the Typescript config (by default compiles all files in directory and sub-directries)
 
 
-Which options should you always specify in the Typescript config
+> Which options should you always specify in the Typescript config
 
         use strict mode   // builds a stronger program e.g. does not allow use of implicit any etc
         specify the target javascript version
         include/exclude   // if you specify exclude, REMEMBER to add back 'node_modules' which is excluded by default
 
 
-What is watch mode:
+> What is watch mode:
 
         - listens for changes in targeted source files and recompiles automatically on change
 
         tsc --watch
 
 
-Which options exist to control the source files that should be compiled:
+> Which options exist to control the source files that should be compiled:
 
         - the `files` option targets a fixed set of typescript files (but is rarely used)
 
@@ -42,7 +46,11 @@ Which options exist to control the source files that should be compiled:
         - see tsconfig.json in 08-typescript-compiler folder for examples
 
 
-What is meant by type inference
+========================================================================================
+Type Annotations
+========================================================================================
+
+> What is meant by type inference
 
     - type inference means typescript can automatically detect types if a value is assigned to a variable
     - also if a function always returns a specific type, or never returns a value (void)
@@ -53,33 +61,27 @@ What is meant by type inference
         bool_var_inferred="Foo-bool";
 
 
-What is the `any` type and when is it applied
+> What is the `any` type and when is it applied
 
 
-What is the equivalent to the Java keyword: `final`
+> What is the equivalent to the Java keyword: `final`
 
     - readonly
 
 
-How can we make a field in a type definition optional/readonly - what is meant by readonly
+> How can we make a field in a type definition optional/readonly - what is meant by readonly
 
-Write an example of a Typescript arrow function with parameters:
+
+> Write an example of a Typescript arrow function with parameters:
 
         const my_typed_arrow_fun = (x:number, y:number) : number => x * y;
 
 
-How can you constrain a variable to a list of potential values
+========================================================================================
+Union Types, Intersections etc
+========================================================================================
 
-    - create a literal union type
-
-        type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
-
-What is a Tuple
-
-Illustrate how to write numeric, string and heterogenous enums
-
-
-Exemplify how to use intersections
+> Exemplify how to use intersections
 
     - intersections combine the fields of one or more types - either inline or explicitly defined
 
@@ -91,8 +93,29 @@ Exemplify how to use intersections
 
         console.log(retired_pro);
 
+> How can you constrain a variable to a list of potential values
 
-List the differences between interfaces and types
+    - create a literal union type
+
+        type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+
+========================================================================================
+Tuples and Enums
+========================================================================================
+
+> What is a Tuple
+
+
+> Illustrate how to write numeric, string and heterogenous enums
+
+
+========================================================================================
+Interfaces
+========================================================================================
+
+
+> List the differences between interfaces and types
 
     - interfaces relate purely to objects or classes and can define methods that should be implemented on the object/class
     - types can constrain to a list of permissable values (via unions) or types (via intersections)
@@ -102,6 +125,76 @@ List the differences between interfaces and types
 
     - see the `07-interfaces/code` folder for worked examples
 
+========================================================================================
+Importing and Exporting
+========================================================================================
+
+> What is meant by global shared scope, and how can it causes issues
+
+    - Relevant when a Javascript or Typescript file does not explicitly export functions or variables.
+    - In this scenario any functions and variables that are defined are added to a "global shared scope"
+    - 2 files of this nature will share the same scope, meaning they cannot use the same name for a variable/function
+    - To resolve this issue either export members, or add  'export {}' to your file
+
+    - See 'file1.ts' and 'file2.ts', then 'file1-fixed.ts' and 'file2-fixed.ts' for examples
+
+
+> What is meant by a default export - how do you import such exports
+
+    - A file can export one default member
+    - This member can then be imported without the need for curly braces, and can be aliased without using 'as'
+
+        /*======= FILE 1 =======**/
+        export default function exportedFn() {
+            return "I was exported from another file.";
+        }
+
+        // you can also define the default export as a separate statement
+        // export default exportedFn();
+
+        /*======= FILE 2 =======**/
+        import exportedFn from "./exporter";
+        import ExF from "./exporter";          // this is an alias for the above function
+
+        console.log(exportedFn());
+        console.log(ExF());
+
+
+> How do you export and import multiple members
+
+    - The first file uses the 'export' statement before the members to export
+    - In the second file use the 'import' statement, with required members placed in curly braces
+    - You can alias imported members using the 'as' keyword
+
+        /*======= FILE 1 =======**/
+        export function exFn1()  { return "I am the first function to be exported."; }
+        export function exFn2()  { return "I am the second function to be exported."; }
+
+        export default exFn1();   // we can have a default export too
+
+        /*======= FILE 2 =======**/
+        import {exFn1, exFn2 as ExF2} from "./multi-exporter";
+
+        console.log(exFn1());
+        console.log(ExF2());
+
+
+> How do you import all members from a file
+
+    - Use import *
+
+        import * as foo from './otherClass';
+        foo.exportedFn()
+
+> How do you import methods from node_modules and other locations - which paths are scanned for imported members
+
+     - Node.JS automatically scans the 'node_modules' directory within the project root.
+     - Thus, you could use a relative path like: `import * as express from 'express/express.js'`
+
+     - You can also ask it to check additional directories using the NODE_PATH environment variable.
+     - N.B. directories must be separated via a colon e.g 'export NODE_PATH="/tmp/node1:/tmp/node2"'
+     - Again, you can use relative paths for any directories included in this variable
+     - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
 
 
 
