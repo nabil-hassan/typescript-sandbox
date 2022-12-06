@@ -1,0 +1,22 @@
+============================================================================================
+Type Definition Files
+============================================================================================
+
+> What are type definition files
+
+    - type definition files are shipped with external libraries and contain types and interfaces
+    - they have the extension .d.ts
+    - if you double click on an exported method you can normally see its definition in a .d.ts file
+
+
+> What if a library does not contain a .d.ts file
+
+
+    - most popular libraries have a separate type definition file defined in the repo:  https://github.com/definitelytyped/definitelytyped/#definitelytyped
+    - if you go to the Typescript website you can normally find instructions to install the additional types: https://www.typescriptlang.org/dt/search
+    - lets say we wanted the lodash library we could simply use the following
+
+        npm install lodash
+        npm install --save-dev @types/lodash      // types will not be needed in production code since we compile to JS
+
+    - see: https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html

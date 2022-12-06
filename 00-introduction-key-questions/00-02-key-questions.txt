@@ -47,6 +47,18 @@ Typescript projects and compilation
 
 
 ========================================================================================
+NPM
+========================================================================================
+
+> Typical instructions to setup a new node project
+
+    npm install -y                           // creates a new package.json
+    node install express                     // adds the express package as a dev and production scoped dependency
+    npm install --save-dev @types/lodash     // add a dev scoped dependency for the type definitions of lodash library
+
+
+
+========================================================================================
 Type Annotations
 ========================================================================================
 
@@ -196,5 +208,27 @@ Importing and Exporting
      - Again, you can use relative paths for any directories included in this variable
      - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
 
+============================================================================================
+Type Definition Files
+============================================================================================
+
+> What are type definition files
+
+    - type definition files are shipped with external libraries and contain types and interfaces
+    - they have the extension .d.ts
+    - if you double click on an exported method you can normally see its definition in a .d.ts file
+
+
+> What if a library does not contain a .d.ts file
+
+
+    - most popular libraries have a separate type definition file defined in the repo:  https://github.com/definitelytyped/definitelytyped/#definitelytyped
+    - if you go to the Typescript website you can normally find instructions to install the additional types: https://www.typescriptlang.org/dt/search
+    - lets say we wanted the lodash library we could simply use the following
+
+        npm install lodash
+        npm install --save-dev @types/lodash      // types will not be needed in production code since we compile to JS
+
+    - see: https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html
 
 
