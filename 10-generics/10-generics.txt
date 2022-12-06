@@ -1,3 +1,9 @@
 ============================================================================================
 Generics
 ============================================================================================
+
+> Write a generically typed function which can take a single argument of any type and simply return it
+
+
+> Write a generically typed function which takes an array of any type and returns a random value from it
+
