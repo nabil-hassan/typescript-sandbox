@@ -4,6 +4,8 @@ KEY QUESTIONS
 
 nb you can use Array or [] to represent an array type
 
+nb make sure to go back across all chapters to check
+
 ========================================================================================
 Typescript projects and compilation
 ========================================================================================
@@ -58,7 +60,51 @@ NPM
     node install express                     // adds the express package as a dev and production scoped dependency
     npm install --save-dev @types/lodash     // add a dev scoped dependency for the type definitions of lodash library
 
+============================================================================================
+Type narrowing
+============================================================================================
 
+> What does the typeof operator return
+
+    - undefined, string, number, boolean, object
+    - nb null, array and object are all considered 'objects'
+
+
+> How can you check whether a variable is null, defined, or empty - how can you check for the inverse - what is this called
+
+    - this is known as truthiness/falsiness
+    - the falsiness statement if (!var) checks if variable is undefined, null, false, or a string with length = 0:
+    - the truthiness statement 'if (var)'' is true if the inverse of above - if a string has one space character it is true
+    - see 02-truthiness.ts for example
+
+
+> Difference between equals and triple equals via example
+
+    - '===' returns true only if the type and value match
+    - '==' returns true if value matches
+    - e.g. if (9 == "9") returns true, whereas (9 === "9") returns false
+
+
+> What is the purpose of the 'in' operator
+
+    - returns true if an object has the specified property
+
+        console.assert("name" in {"name" : "Jon", "occupation" : "king"});
+
+
+> What limitations does the 'instanceof' operator have:
+
+    - it can only be used for classes and arrays
+    - it cannot be used for primitive types or interfaces :(
+
+        console.log(new Animal("Simba") instanceof Animal);
+        console.log(["1", "2", "3"] instanceof Array);
+
+
+> How can you overcome these limitations
+
+    - see the file '03-instanceof.ts' in the type narrowing section for interfaces
+    - use typeof for primitive types
 
 ========================================================================================
 Type Annotations

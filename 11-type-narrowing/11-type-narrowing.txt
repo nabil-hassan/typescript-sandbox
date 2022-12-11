@@ -1,0 +1,53 @@
+============================================================================================
+Type narrowing
+============================================================================================
+
+> What does the typeof operator return
+
+    - undefined, string, number, boolean, object
+    - nb null, array and object are all considered 'objects'
+
+
+> How can you check whether a variable is null, defined, or empty - how can you check for the inverse - what is this called
+
+    - this is known as truthiness/falsiness
+    - the falsiness statement if (!var) checks if variable is undefined, null, false, or a string with length = 0:
+    - the truthiness statement 'if (var)'' is true if the inverse of above - if a string has one space character it is true
+    - see 02-truthiness.ts for example
+
+
+> Difference between equals and triple equals via example
+
+    - '===' returns true only if the type and value match
+    - '==' returns true if value matches
+    - e.g. if (9 == "9") returns true, whereas (9 === "9") returns false
+
+
+> What is the purpose of the 'in' operator
+
+    - returns true if an object has the specified property
+
+        console.assert("name" in {"name" : "Jon", "occupation" : "king"});
+
+
+> What limitations does the 'instanceof' operator have:
+
+    - it can only be used for classes and arrays
+    - it cannot be used for primitive types or interfaces :(
+
+        console.log(new Animal("Simba") instanceof Animal);
+        console.log(["1", "2", "3"] instanceof Array);
+
+
+> What limitation can user-defined type guards allegedly overcome - is this feasible:
+
+    - allegedly can be used to check whether something is an instance of an interface
+    - however this approach is flawed and does not work correctly
+    - see 03-instanceof for a worked example
+
+
+> What are discriminated unions
+
+    - another approach to implementing an instanceof check for interfaces
+    - more appropriate but also prone to developer error
+    - see 03-instanceof for a worked example
