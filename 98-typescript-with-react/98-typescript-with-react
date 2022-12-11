@@ -1,0 +1,7 @@
+=================================================================
+Typescript with React
+=================================================================
+
+> How do you use generics in a TSX file
+
+    - To not confuse Typescript, you must add a comma before the > tag e.g. <T,> not <T>

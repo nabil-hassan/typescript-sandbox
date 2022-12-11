@@ -1,5 +1,5 @@
 ============================================================================================
-Generics
+Generic Functions
 ============================================================================================
 
 > Write a generically typed function which can take a single argument of any type and simply return it
@@ -20,3 +20,12 @@ Generics
         let rand: number = Math.floor(Math.random() * source.length);
         return source[rand];
     }
+
+
+> How do you apply type bounds to generic parameters
+
+    - use 'extends' as per Java
+
+        function printAPerson<T extends Person>(t: T) {
+            console.log(t.age + ":" + t.name);
+        }

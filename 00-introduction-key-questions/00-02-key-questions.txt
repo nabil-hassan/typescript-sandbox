@@ -2,6 +2,8 @@
 KEY QUESTIONS
 ============================================================
 
+nb you can use Array or [] to represent an array type
+
 ========================================================================================
 Typescript projects and compilation
 ========================================================================================
@@ -209,6 +211,65 @@ Importing and Exporting
      - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
 
 ============================================================================================
+Classes
+============================================================================================
+
+> Class fields/properties can be defined in two ways - illustrate both
+
+    - fields can be defined at class level or inferred via the constructor
+    - if using constructor inference, the access modifier for the arguments must be specified
+
+        // define a class with fields explicitly specified
+        class Thing {
+            score = 0; id: number; name: string;
+
+            constructor(id: number, name: string) {
+                this.id = id;
+                this.name = name;
+            }
+        }
+
+        // define a class that uses constructor inference to provide equivalent form of above
+        class InferredThing {
+            score = 0;
+
+            constructor(public id: number, public name: string) {
+                this.id = id;
+                this.name = name;
+            }
+        }
+
+
+> What 4 access modifiers does Javascript have - illustrate each and identify what the default access level is
+
+    - public, private, readonly, protected
+    - if you exclude these keywords, the default is public, non-readonly
+    - protected applies to subclasses, meaning they can access their parents properties
+
+
+> Illustrate how to use abstract classes and interfaces
+
+    - see example below
+    - if a class defines an abstract method, it must be defined abstract
+
+        abstract class Animal {
+            protected name: string;
+            constructor(name: string) {this.name = name;}
+
+            abstract type() : string;
+        }
+
+        class Cat extends Animal {
+            type(): string {
+                return "Cat";
+            }
+
+        }
+
+        // notice the implicit call to  Animal's constructor - we didn't need to explicitly define a constructor in Cat
+        let cat : Cat = new Cat("Mittens");
+
+============================================================================================
 Type Definition Files
 ============================================================================================
 
@@ -231,4 +292,17 @@ Type Definition Files
 
     - see: https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html
 
+============================================================================================
+Generics
+============================================================================================
+> Write a generically typed function which takes an array of any type and returns a random value from it
 
+    function returnRandomElement<T>(source: Array<T>): T {
+        let rand: number = Math.floor(Math.random() * source.length);
+        return source[rand];
+    }
+
+    function returnRandomElementV2<T>(source: T[]): T {
+        let rand: number = Math.floor(Math.random() * source.length);
+        return source[rand];
+    }

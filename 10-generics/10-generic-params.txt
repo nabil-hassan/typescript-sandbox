@@ -1,0 +1,27 @@
+============================================================================================
+Generic Params
+============================================================================================
+
+> What are inferred type parameters
+
+    - if you do specify a type parameter when calling a method, Typescript can infer its type from the return statement
+
+        function encloseInArray<T>(t : T) : Array<T> {
+            return [t];
+        }
+        const singleNumberArray = encloseInArray(9); console.assert(typeof singleNumberArray[0] === 'number');
+        const singleStringArray = encloseInArray("abc"); console.assert(typeof singleStringArray[0] === 'string');
+        const singleObjectArray = encloseInArray({}); console.assert(typeof singleObjectArray === 'object');
+
+
+> How are default generic type parameters defined
+
+    - using the = operator
+
+    function returnEmptyArray<T = number>():T[] {
+        return [];
+    }
+    const numberArray = returnEmptyArray(); console.log(numberArray);            // numberArray type = number[]
+    const stringArray = returnEmptyArray<string>(); console.log(stringArray);    // stringArray type = string[]
+
+

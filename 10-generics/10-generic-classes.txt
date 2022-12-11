@@ -1,0 +1,11 @@
+============================================================================================
+Generic Classes
+============================================================================================
+
+> Write a generic class which wraps an array of any type and contains methods to add and retrieve elements
+
+    class List<T> {
+        constructor(public data : Array<T>) {this.data = data;}
+        add(t: T) {this.data.push(t);}
+        get(i: number) {return this.data[i];}
+    }

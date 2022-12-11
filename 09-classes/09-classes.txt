@@ -2,7 +2,7 @@
 CLASSES
 ============================================================================================
 
-Class fields/properties can be defined in two ways - illustrate both
+> Class fields/properties can be defined in two ways - illustrate both
 
     - fields can be defined at class level or inferred via the constructor
     - if using constructor inference, the access modifier for the arguments must be specified
@@ -28,14 +28,14 @@ Class fields/properties can be defined in two ways - illustrate both
         }
 
 
-What 4 access modifiers does Javascript have - illustrate each and identify what the default access level is
+> What 4 access modifiers does Javascript have - illustrate each and identify what the default access level is
 
     - public, private, readonly, protected
     - if you exclude these keywords, the default is public, non-readonly
     - protected applies to subclasses, meaning they can access their parents properties
 
 
-Illustrate how to use abstract classes and interfaces
+> Illustrate how to use abstract classes and interfaces
 
     - see example below
     - if a class defines an abstract method, it must be defined abstract
