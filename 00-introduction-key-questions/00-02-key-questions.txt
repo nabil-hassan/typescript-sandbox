@@ -59,6 +59,7 @@ NPM
     npm install -y                           // creates a new package.json
     node install express                     // adds the express package as a dev and production scoped dependency
     npm install --save-dev @types/lodash     // add a dev scoped dependency for the type definitions of lodash library
+    npm run dev 							 // run a local dev server
 
 > What is difference between npm and npx
 
