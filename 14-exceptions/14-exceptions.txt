@@ -1,0 +1,26 @@
+========================================================================================================================
+Typescript exceptions
+========================================================================================================================
+
+> If you want to implement custom exception classes in Typescript you need to make sure to follow this formula:
+
+    class MyError extends Error {
+        constructor(message: string) {
+            super(message);
+            Object.setPrototypeOf(this, MyError.prototype)
+        }
+    }
+
+> This can then be used and 'instanceof' checked:
+
+    const myFunction = () => {
+       throw new MyError('some reason');
+    }
+
+    try {
+        myFunction();
+    } catch (error) {
+        if (error instanceof MyError) {
+            // Handle MyError....
+        }
+    }

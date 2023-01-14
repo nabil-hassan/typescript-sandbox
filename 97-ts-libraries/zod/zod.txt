@@ -1,0 +1,40 @@
+====================================================
+Zod
+====================================================
+
+> If you need to transform field names do it like this:
+
+const UserSchema = z.object({
+  first_name: z.string(),
+}).transform((user) => ({
+  firstName: user.first_name
+}));
+
+> If you want your schema to live in a separate file:
+
+// file: rule-file-metadata.ts
+  import { z } from "zod";
+
+  export const RuleFileMetadata = z.object({
+      email: z.string().email(),
+      ponumber: z.string()
+  });
+
+  export type RuleFileMetadata = z.infer<typeof RuleFileMetadata>;
+
+// file: index.ts  
+import { RuleFileMetadata } from './rule-file-metadata';
+
+let {Metadata, ContentLength} = await s3.send(params);
+console.log("MetaData: ", Metadata);
+const fileMetadata = RuleFileMetadata.parse(Metadata);
+
+
+> To add a message you can use one of two forms:
+
+activestartdate: z.string().regex(dateTimeRegex, "Invalid date format. Required format: YYYY-MM-DDTHH24:MI:SS"),
+
+onst name = z.string({
+  required_error: "Name is required",
+  invalid_type_error: "Name must be a string",
+});

@@ -6,6 +6,25 @@ nb you can use Array or [] to represent an array type
 
 nb make sure to go back across all chapters to check
 
+DIFFERENCE BETWEEN TYPE< INTERFACE AND CLASS
+
+If you have an element that is optional, and wish to return a different version of the object that is guaranteed to be present, use as:
+
+    // this is our personal representation which guarantees the metadata and content properties will be defined
+    export type S3Object =  {
+        metadata: Record<string, string>;
+        content: string;
+    }
+
+    // the aws s3 client has Metadata and Body as optionals
+    const {Metadata, Body} = await s3.send(command);
+    if (Metadata === undefined || Body === undefined) {
+        throw new Error("The specified file is missing body or metadata");        
+    }
+
+    // when we return the object we use as like a cast - the consumer cna now guarantee they will be able to access the data
+    return {metadata: Metadata as Record<string, string>, body: Body as string};
+
 ========================================================================================
 Typescript projects and compilation
 ========================================================================================
