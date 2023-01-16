@@ -7,3 +7,4 @@ node_modules
 /10-integrated-node-and-ts-project/project/prisma/migrations/
 /10-integrated-node-and-ts-project/project/prisma/dev.db
 dist/
+.DS_Store

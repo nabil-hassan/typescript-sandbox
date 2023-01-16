@@ -1,0 +1,171 @@
+=================================================================================================================================================
+The New Beginning: Typescript 
+=================================================================================================================================================
+
+Be sure to check 00-01-introduction for missing elements.
+
+=================================================================================================================================================
+Starting Off
+=================================================================================================================================================
+
+> What is the main thing to remember when using Typescript
+
+    - Typescript MUST be compiled into Javascript - it is really just syntactic sugar
+
+
+> What steps should you follow when starting a new Typescript project
+
+    - Install Typescript and ts-node globally (and optionally at a project level)
+    - Initialise a new tsconfig.json file
+
+        npm install -g typescript ts-node
+        tsc --help
+        npm install --save-dev @types/lodash 
+
+
+> List the options for compiling Typescript files:
+
+        tsc                     // compiles all files as specified by the tsconfig.json file
+        tsc --watch             // compiles and automatically recompiles on change
+        tsc <path-to-file>      // compiles a single file
+
+
+> How can you run Typescript without compiling it and running as a raw Javascript file:
+
+        npx ts-node <path-to-ts-file>
+
+    
+
+=================================================================================================================================================
+Imports Exports
+=================================================================================================================================================
+
+> What is meant by global shared scope, and how can it causes issues
+
+    - To be aware of when a Javascript or Typescript file does not explicitly export functions or variables.
+    - The members of files without any exports are automatically added to the  "global shared scope"
+    - This means two files without exports cannot use the same name for a variable/function :(
+    
+    - To resolve this issue either export members, or add  'export {}' to your file
+
+
+> What is meant by a default export - how do you import such exports
+
+    - A file can export one default member
+    - This member can then be imported without the need for curly braces, and can be aliased without using 'as'
+
+        /*======= FILE 1 =======**/
+        export default function exportedFn() {
+            return "I was exported from another file.";
+        }
+
+        // you can also define the default export as a separate statement
+        // export default exportedFn();
+
+        /*======= FILE 2 =======**/
+        import exportedFn from "./exporter";
+        import ExF from "./exporter";          // this is an alias for the above function
+
+        console.log(exportedFn());
+        console.log(ExF());
+
+
+> How do you export and import multiple members
+
+    - The first file uses the 'export' statement before the members to export
+    - In the second file use the 'import' statement, with required members placed in curly braces
+    - You can alias imported members using the 'as' keyword
+
+        /*======= FILE 1 =======**/
+        export function exFn1()  { //....}
+        export function exFn2()  { //....}
+
+        export default exFn1();   // we can have a default export too
+
+        /*======= FILE 2 =======**/
+        import {exFn1, exFn2 as ExF2} from "./multi-exporter";
+
+        console.log(exFn1());
+        console.log(ExF2());
+
+
+> How do you import all members from a file
+
+    - Use import *
+
+        import * as foo from './otherClass';
+        foo.exportedFn()
+
+
+> How do you import methods from node_modules and other locations - which paths are scanned for imported members
+
+     - The imports shown above use relative paths to members contained in files within the same project
+     - Node.JS automatically scans the 'node_modules' directory within the project root.
+     - Thus, you could use a relative path like: `import * as express from 'express/express.js'`
+
+     - You can also ask it to check additional directories using the NODE_PATH environment variable.
+     - N.B. directories must be separated via a colon e.g 'export NODE_PATH="/tmp/node1:/tmp/node2"'
+     - Again, you can use relative paths for any directories included in this variable
+     - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
+
+
+
+===========================================================================================================================
+Type Labels
+===========================================================================================================================
+
+> What are type labels
+
+    - type labels are specified using ":" after a variable name
+    - once a type is assigned to a variable 'v' the values assigned to 'v' must be of the same type
+    - the assignment on the 2nd line below is ILLEGAL
+
+        let str_var:string = "hello world"; let num_var:number = 99; let bool_var:boolean = false;
+        str_var=101;
+
+
+> What is type inference
+
+    - type inference means typescript can automatically detect variable types if a value is assigned
+    - notice the lack of type labels
+    - again, the assignment on the 2nd line is ILLEGAL
+
+        let str_var_inferred = "hello world"; 
+        let num_var_inferred = 99; 
+        let bool_var_inferred = false;
+        bool_var_inferred="Foo-bool";
+
+
+> Do Typescript variables really have to be of a specific type?
+
+    - the 'any' type means any type can be assigned to a variable
+    - notice the assignment on the second line is now made LEGAL
+
+        let any_var:any = "I am flexible";
+        any_var = false;
+
+    - you can also use union types via the pipe symbol
+    - this block of code is valid - you can reassign the variable as a different type :(
+
+        let foo:string|number; 
+        foo = 99;
+        foo = "hello";
+
+> In what circumstances can you not rely on type inference
+
+    - you cannot rely on type inference when using delayed initialisation, as typescript infers 'any' as the type of v
+    - in the example below, even though we intend for the var to be a string, it is changed to a boolean on line 3
+    - thus, we should always type label any such variables beforehand
+
+        let delayed_var;
+        delayed_var = Math.random() < 0.5 ? "Less" : "More";
+        delayed_var = false;
+
+
+> How can you represent arrays with labels:
+
+    - you can use one square braces or array
+    - Notice the second form requires you to upper case primitive types i.e. Array<String> not Array<string>
+
+        let a1:string[]       = ["Bob", "Job", "Gob"]; 
+        let a2:Array<String>  = ["Mob", "Sob"]; 

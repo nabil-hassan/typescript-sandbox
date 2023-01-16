@@ -4,12 +4,11 @@ Importing and Exporting
 
 > What is meant by global shared scope, and how can it causes issues
 
-    - Relevant when a Javascript or Typescript file does not explicitly export functions or variables.
-    - In this scenario any functions and variables that are defined are added to a "global shared scope"
-    - 2 files of this nature will share the same scope, meaning they cannot use the same name for a variable/function
+    - To be aware of when a Javascript or Typescript file does not explicitly export functions or variables.
+    - The members of files without any exports are automatically added to the  "global shared scope"
+    - This means two files without exports cannot use the same name for a variable/function :(
+    
     - To resolve this issue either export members, or add  'export {}' to your file
-
-    - See 'file1.ts' and 'file2.ts', then 'file1-fixed.ts' and 'file2-fixed.ts' for examples
 
 
 > What is meant by a default export - how do you import such exports
@@ -40,8 +39,8 @@ Importing and Exporting
     - You can alias imported members using the 'as' keyword
 
         /*======= FILE 1 =======**/
-        export function exFn1()  { return "I am the first function to be exported."; }
-        export function exFn2()  { return "I am the second function to be exported."; }
+        export function exFn1()  { //....}
+        export function exFn2()  { //....}
 
         export default exFn1();   // we can have a default export too
 
@@ -59,8 +58,10 @@ Importing and Exporting
         import * as foo from './otherClass';
         foo.exportedFn()
 
+
 > How do you import methods from node_modules and other locations - which paths are scanned for imported members
 
+     - The imports shown above use relative paths to members contained in files within the same project
      - Node.JS automatically scans the 'node_modules' directory within the project root.
      - Thus, you could use a relative path like: `import * as express from 'express/express.js'`
 

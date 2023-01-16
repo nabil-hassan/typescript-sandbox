@@ -2,9 +2,9 @@
 TYPE ANNOTATIONS
 ============================================================================================
 
-1. What are type annotations
+1. What are type labels
 
-    - type annotations are labels which indicate the type of a variable
+    - type labels are specified using ":" after a variable name
     - once a type is assigned to a variable 'v' the values assigned to 'v' must be of the same type
     - the assignment on the 2nd line below is ILLEGAL
 
@@ -18,11 +18,13 @@ TYPE ANNOTATIONS
     - notice the lack of type labels
     - again, the assignment on the 2nd line is ILLEGAL
 
-        let str_var_inferred = "hello world"; let num_var_inferred = 99; let bool_var_inferred = false;
+        let str_var_inferred = "hello world"; 
+        let num_var_inferred = 99; 
+        let bool_var_inferred = false;
         bool_var_inferred="Foo-bool";
 
 
-3. What is the `any` type annotation
+3. Do Typescript variables really have to be of a specific type?
 
     - the 'any' type means any type can be assigned to a variable
     - notice the assignment on the second line is now made LEGAL
@@ -30,13 +32,28 @@ TYPE ANNOTATIONS
         let any_var:any = "I am flexible";
         any_var = false;
 
+    - you can also use union types via the pipe symbol
+    - this block of code is valid - you can reassign the variable as a different type :(
 
-4. In what circumstances may you not want to rely on type inference
+        let foo:string|number; 
+        foo = 99;
+        foo = "hello";
+
+4. In what circumstances can you not rely on type inference
 
     - you cannot rely on type inference when using delayed initialisation, as typescript infers 'any' as the type of v
     - in the example below, even though we intend for the var to be a string, it is changed to a boolean on line 3
-    - thus, we should always type label any such variables
+    - thus, we should always type label any such variables beforehand
 
         let delayed_var;
         delayed_var = Math.random() < 0.5 ? "Less" : "More";
         delayed_var = false;
+
+
+5. How can you represent arrays with labels:
+
+    - you can use one square braces or array
+    - Notice the second form requires you to upper case primitive types i.e. Array<String> not Array<string>
+
+        let a1:string[]       = ["Bob", "Job", "Gob"]; 
+        let a2:Array<String>  = ["Mob", "Sob"]; 

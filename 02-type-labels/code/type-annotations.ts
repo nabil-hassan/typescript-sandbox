@@ -20,8 +20,21 @@ let str_var_inferred = "hello world"; let num_var_inferred = 99; let bool_var_in
 let any_var:any = "I am flexible";
 any_var = false;  // this is legal!
 
+// you can also use multiple types 
+let foo:string|number; 
+foo = 99;
+foo = "hello";
+
 // you cannot rely on type inference when using delayed initialisation, as typescript infers 'any' as the type of v
 let delayed_var;
 
 delayed_var = Math.random() < 0.5 ? "Less" : "More";
 delayed_var = false;  // notice how we were able to switch types even though we wanted a String!!!!
+
+console.log("============================================================================================")
+console.log("                           Array Types                                                      ")
+console.log("============================================================================================")
+
+let squareBraceTypedArray:string[] = ["Bob", "Job", "Gob"]; 
+let explicitTypedArray:Array<String> = ["Bob", "Job", "Gob"]; 
+

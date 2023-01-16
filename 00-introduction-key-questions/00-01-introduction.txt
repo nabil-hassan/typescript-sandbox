@@ -9,6 +9,10 @@ To install Typescript:
     npm install -g typescript
     tsc --help
 
+If you are using NPM you normally fix the version of Typescript to be used like so:
+
+    npm install typescript@'>==4.2.3 <4.3.0
+
 To initialise a new tsconfig.json file
 
     tsc --init
@@ -25,3 +29,7 @@ To compile all source files targeted by tsconfig.json, just do:
 Typically it is quite useful to run a compile `watch` which will auto recompile on file changes
 
     tsc --watch
+
+If a library does not have type definitions bundled with it, you can install them manually if they are available at definitely typed:
+
+    npm install --save-dev @types/lodash 
