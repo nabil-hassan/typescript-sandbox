@@ -1,0 +1,11 @@
+========================================================================================
+Type Extension
+========================================================================================
+
+> The utilities "Pick" and "Omit" allow you to create a new type based on some subset of an existing interface.
+
+> You can either create a new type from an existing interface, or a new interface from a type.
+
+> However, you CANNOT use pick and omit to go from one existing type to a new type.
+
+> See the code section for examples.

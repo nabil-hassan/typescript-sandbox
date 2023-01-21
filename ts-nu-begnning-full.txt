@@ -4,6 +4,8 @@ The New Beginning: Typescript
 
 Be sure to check 00-01-introduction for missing elements.
 
+NB WHAT IS 'IN' USED FOR WITH TYPES
+
 =================================================================================================================================================
 Starting Off
 =================================================================================================================================================
@@ -116,7 +118,7 @@ Type Labels
 
 > What are type labels
 
-    - type labels are specified using ":" after a variable name
+    - type labels (aka type annotations) are specified using ":" after a variable name
     - once a type is assigned to a variable 'v' the values assigned to 'v' must be of the same type
     - the assignment on the 2nd line below is ILLEGAL
 
@@ -126,14 +128,16 @@ Type Labels
 
 > What is type inference
 
-    - type inference means typescript can automatically detect variable types if a value is assigned
+    - type inference means typescript can automatically detect variable types if a literal value is assigned, or obtained from a function call
     - notice the lack of type labels
     - again, the assignment on the 2nd line is ILLEGAL
 
         let str_var_inferred = "hello world"; 
         let num_var_inferred = 99; 
         let bool_var_inferred = false;
-        bool_var_inferred="Foo-bool";
+        bool_var_inferred="Foo-bool";       // not legal, since inferred type is boolean
+
+        let custom = getCustomer();         // type is inferred from function return type
 
 
 > Do Typescript variables really have to be of a specific type?
@@ -169,3 +173,11 @@ Type Labels
 
         let a1:string[]       = ["Bob", "Job", "Gob"]; 
         let a2:Array<String>  = ["Mob", "Sob"]; 
+
+=================================================================================================================================================
+Union Types And Type Extension
+=================================================================================================================================================
+
+> How can you override an existing type to eg remove/replace existing fields
+
+

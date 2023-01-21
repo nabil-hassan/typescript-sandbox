@@ -2,6 +2,9 @@
 Zod
 ====================================================
 
+To run the example: npx ts-node zod.ts
+
+
 > If you need to transform field names do it like this:
 
 const UserSchema = z.object({

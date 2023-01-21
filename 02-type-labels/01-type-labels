@@ -4,7 +4,7 @@ TYPE ANNOTATIONS
 
 1. What are type labels
 
-    - type labels are specified using ":" after a variable name
+    - type labels (aka type annotations) are specified using ":" after a variable name
     - once a type is assigned to a variable 'v' the values assigned to 'v' must be of the same type
     - the assignment on the 2nd line below is ILLEGAL
 

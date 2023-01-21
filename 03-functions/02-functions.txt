@@ -2,7 +2,7 @@
 FUNCTIONS
 ============================================================================================
 
-1. How do you add type annotations to functions
+1. How do you add type annotations to functions - are they mandatory
 
     - use labels
     - if you do not use labels, typescript will infer "any"
