@@ -43,6 +43,14 @@ Type narrowing
         }
         });    
 
+
+> How can you achieve the Java access via cast recipe ((Customer)c).getRegion()
+
+    - conditional access using instanceof
+    - here, data only exsists on a TRPCClientError
+
+        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;        
+
 > If a variable can have multiple types, how do you cast it
 
     - use the as keyword:

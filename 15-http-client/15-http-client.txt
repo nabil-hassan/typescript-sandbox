@@ -1,0 +1,10 @@
+====================================================================================================================
+HTTP Client
+====================================================================================================================
+
+
+> It is recommended to use node-fetch but at present latest has an issue which makes is incompatible with Typescript
+
+> For now, install it like so:
+
+    npm install node-fetch@2

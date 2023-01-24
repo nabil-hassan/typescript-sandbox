@@ -2,6 +2,32 @@
 Typescript exceptions
 ========================================================================================================================
 
+
+============================================================================================================
+Handling exceptions
+============================================================================================================
+
+> try catch blocks are a bit funky in ts as it regards the exception as unknown | any
+
+> the recipe below can be used if you want to verify the exception message
+
+    try {
+        throw new Error('Oh no!')
+    } catch (error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        // we'll proceed, but let's report it
+        reportError({message})
+    }
+
+    // or a more compact form
+    if (error instanceof Error) message = error.message
+
+============================================================================================================
+Building Custom Exceptions
+============================================================================================================
+
 > If you want to implement custom exception classes in Typescript you need to make sure to follow this formula:
 
     class MyError extends Error {

@@ -51,6 +51,13 @@ Starting Off
             let addressInfo = server.address() as AddressInfo;
 
 
+> How can you achieve the Java access via cast recipe ((Customer)c).getRegion()
+
+    - conditional access using instanceof
+    - here, data only exsists on a TRPCClientError
+
+        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;
+
 > What steps should you follow when starting a new Typescript project
 
     - Install Typescript and ts-node globally (and optionally at a project level)
