@@ -53,6 +53,7 @@ Importing and Exporting
 
 > How do you import all members from a file
 
+    - This is called a "namespace import"
     - Use import *
 
         import * as foo from './otherClass';
@@ -70,4 +71,11 @@ Importing and Exporting
      - Again, you can use relative paths for any directories included in this variable
      - For example, to import /tmp/node1/hello.js you could simply use: `import * as n1 from 'hello.js'`
 
+> How can you explicitly add something to the global scope:
 
+    - Members of a file are added to the global scope if that file contains no exports
+    - However if your file contains exports and you still want to add something to the global scope, use the following:
+
+        declare global {
+            var prisma: PrismaClient | undefined;
+        }

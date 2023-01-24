@@ -15,6 +15,42 @@ Starting Off
     - Typescript MUST be compiled into Javascript - it is really just syntactic sugar
 
 
+
+> List the various 4 possible type check approaches:
+
+    - to check the Javascript type, use typeof: return string, boolean, number, undefined, object etc
+    
+    - if the variable is built using a class, you can use instanceof:
+
+          if (invoice instanceof SalesInvoices) {
+
+    - for a type however, you need to use this        
+
+        if (server.address() as AddressInfo !== undefined) {
+            // we can assume server.address() can be converted to AddressInfo    
+        }
+
+    - or this appraoch using 'is':
+
+        function isValidInvoice(invoice: Invoice): invoice is SalesInvoices {
+            return invoice.amount > 100 && invoice.country === "ES";
+        }
+
+        // the code looks clean.
+        invoicesToProcess.forEach((invoice) => {
+        if (isValidInvoice(invoice)) {
+            console.log(invoice);
+        }
+        });    
+
+
+> If a variable can have multiple types, how do you cast it
+
+    - use the as keyword:
+
+            let addressInfo = server.address() as AddressInfo;
+
+
 > What steps should you follow when starting a new Typescript project
 
     - Install Typescript and ts-node globally (and optionally at a project level)
@@ -93,7 +129,8 @@ Imports Exports
 
 > How do you import all members from a file
 
-    - Use import *
+    - This is known as a "namespace import"
+    - You must use import * and then prefix any referenced member with the alias (here, foo)
 
         import * as foo from './otherClass';
         foo.exportedFn()

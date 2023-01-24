@@ -16,6 +16,40 @@ Type narrowing
     - see 02-truthiness.ts for example
 
 
+> How can you do an 'instanceof' type check:
+
+    - to check the Javascript type, use typeof: return string, boolean, number, object etc
+    
+    - if the variable is built using a class, you can use instanceof:
+
+          if (invoice instanceof SalesInvoices) {
+
+    - for a type however, you need to use this        
+
+        if (server.address() as AddressInfo !== undefined) {
+            // we can assume server.address() can be converted to AddressInfo    
+        }
+
+    - or this appraoch using 'is':
+
+        function isValidInvoice(invoice: Invoice): invoice is SalesInvoices {
+            return invoice.amount > 100 && invoice.country === "ES";
+        }
+
+        // the code looks clean.
+        invoicesToProcess.forEach((invoice) => {
+        if (isValidInvoice(invoice)) {
+            console.log(invoice);
+        }
+        });    
+
+> If a variable can have multiple types, how do you cast it
+
+    - use the as keyword:
+
+            let addressInfo = server.address() as AddressInfo;
+
+
 > Difference between equals and triple equals via example
 
     - '===' returns true only if the type and value match
