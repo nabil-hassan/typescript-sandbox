@@ -4,6 +4,12 @@ Typescript introduces a type system for Javascript, making it easier to spot err
 
 The Typescript compiler is responsible for compiling your Typescript into Javascript.
 
+### The actual sandbox
+
+To experiment with Typescript, refer to [the actual sandbox](the-sandbox) folder.
+
+Also, create yourself an IntelliJ ts-node configuration following the guidelines [here](https://www.jetbrains.com/help/idea/running-and-debugging-typescript.html#ws_ts_run_debug_server_side).
+
 ### To install Typescript:
 
 ```shell

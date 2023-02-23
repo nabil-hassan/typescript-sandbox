@@ -41,4 +41,9 @@ Enums
         console.assert(GameStatus.CALLED_OFF === 91);
 
 
-4.
+4. How can you get an enums "name" like in Java
+
+    enum Enum {
+        A
+    }
+    let nameOfA = Enum[Enum.A]; // "A"

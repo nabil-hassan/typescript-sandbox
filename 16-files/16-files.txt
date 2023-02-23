@@ -1,0 +1,37 @@
+==================================================================================
+Files
+==================================================================================
+
+> To work with files you normally use the fs library from Node:
+
+==================================================================================
+Reading
+==================================================================================
+
+> To read files we can simply use
+
+    import * as fs from 'fs';
+    let bfr = fs.readFileSync('/path-to-file', 'utf-8');
+    console.log(bfr.toString());
+
+> NB when running in a project, you typically want to access a file within the project
+> For this purpose use a path instead - here we open the resources folder located one level above the current file/
+
+    fs.readFileSync(path.join(__dirname, '../resources', "foo.csv"));
+
+> If you wish to be asynchronous:
+
+    import * as fsPromise from 'fs/promises';
+    let content = await fsPromise.readFile(path.join(__dirname, '../resources', "foo.csv"));
+
+> If dealing with a large file MAKE SURE TO USE:
+
+    import * as fsPromise from 'fs/promises';
+    const file = await fsPromise.open('./words.txt', 'r');
+     for await (const line of file.readLines()) {
+         console.log(line);
+     }
+
+> To split by new line use:
+
+    string.split(/\r?\n/)

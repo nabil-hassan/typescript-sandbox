@@ -14,49 +14,9 @@ Starting Off
 
     - Typescript MUST be compiled into Javascript - it is really just syntactic sugar
 
+> What is the main rule of thumb when using Typescript:
 
-
-> List the various 4 possible type check approaches:
-
-    - to check the Javascript type, use typeof: return string, boolean, number, undefined, object etc
-    
-    - if the variable is built using a class, you can use instanceof:
-
-          if (invoice instanceof SalesInvoices) {
-
-    - for a type however, you need to use this        
-
-        if (server.address() as AddressInfo !== undefined) {
-            // we can assume server.address() can be converted to AddressInfo    
-        }
-
-    - or this appraoch using 'is':
-
-        function isValidInvoice(invoice: Invoice): invoice is SalesInvoices {
-            return invoice.amount > 100 && invoice.country === "ES";
-        }
-
-        // the code looks clean.
-        invoicesToProcess.forEach((invoice) => {
-        if (isValidInvoice(invoice)) {
-            console.log(invoice);
-        }
-        });    
-
-
-> If a variable can have multiple types, how do you cast it
-
-    - use the as keyword:
-
-            let addressInfo = server.address() as AddressInfo;
-
-
-> How can you achieve the Java access via cast recipe ((Customer)c).getRegion()
-
-    - conditional access using instanceof
-    - here, data only exsists on a TRPCClientError
-
-        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;
+    - use unknown in favor of any
 
 > What steps should you follow when starting a new Typescript project
 
@@ -64,6 +24,7 @@ Starting Off
     - Initialise a new tsconfig.json file
 
         npm install -g typescript ts-node
+        npm install typescript@'>==4.2.3 <4.3.0 # optional at a project level
         tsc --help
         npm install --save-dev @types/lodash 
 
@@ -79,6 +40,7 @@ Starting Off
 
         npx ts-node <path-to-ts-file>
 
+
     
 
 =================================================================================================================================================
@@ -93,6 +55,16 @@ Imports Exports
     
     - To resolve this issue either export members, or add  'export {}' to your file
 
+> How can you explicitly add something to the global scope:
+
+    - Members of a file are added to the global scope if that file contains no exports
+    - However if your file contains exports and you still want to add something to the global scope, use the following:
+
+        declare global {
+            var prisma: PrismaClient | undefined;
+        }
+
+    - Thus whenever you reference prisma in code it will pick it from global scope
 
 > What is meant by a default export - how do you import such exports
 
@@ -216,7 +188,125 @@ Type Labels
     - Notice the second form requires you to upper case primitive types i.e. Array<String> not Array<string>
 
         let a1:string[]       = ["Bob", "Job", "Gob"]; 
-        let a2:Array<String>  = ["Mob", "Sob"]; 
+        let a2:Array<String>  = ["Mob", "Sob"];
+
+===========================================================================================================================
+Type Label Advanced
+===========================================================================================================================
+
+> What is 'Unknown' and how is it different from any:
+
+    - TypeScript 3.0 introduced a new unknown type which is the type-safe counterpart of the any type.
+
+    - The main difference between unknown and any is that unknown is much less permissive than any:
+      we have to do some form of checking before performing most operations on values of type unknown,
+      whereas we don't have to do any checks before performing operations on values of type any.
+
+    - The following would be possible using any, but are forbidden using unknown:
+
+        let value: unknown;
+        value.foo.bar; // Error - we can't trust it has those properties
+        value.trim(); // Error - we can't trust it has that method
+        value(); // Error - we can't trust it is a function
+
+    - You also cannot type label unknowns like so
+
+        let value: unknown;
+        let value1: unknown = value; // OK
+        let value2: any = value; // OK
+        let value3: boolean = value; // Error
+        let value4: number = value; // Error
+        let value5: string = value; // Error
+
+    - The safest way to use unknowns is to type check them using typeof, instanceof and "if (x as type !== undefined)"
+    - See question below for details
+
+> List the various 4 possible type check approaches:
+
+    - to check the Javascript type, use typeof: return string, boolean, number, undefined, object etc
+
+    - if the variable is built using a class, you can use instanceof:
+
+          if (invoice instanceof SalesInvoices) {
+
+    - for a type however, you need to use this
+
+        if (server.address() as AddressInfo !== undefined) {
+            // we can assume server.address() can be converted to AddressInfo
+        }
+
+    - or this appraoch using 'is':
+
+        function isValidInvoice(invoice: Invoice): invoice is SalesInvoices {
+            return invoice.amount > 100 && invoice.country === "ES";
+        }
+
+        // the code looks clean.
+        invoicesToProcess.forEach((invoice) => {
+        if (isValidInvoice(invoice)) {
+            console.log(invoice);
+        }
+        });
+
+
+> If a variable can have multiple types, how do you cast it
+
+    - use the as keyword:
+
+            let addressInfo = server.address() as AddressInfo;
+
+
+> How can you achieve the Java access via cast recipe ((Customer)c).getRegion()
+
+        // approach 1
+        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;
+
+        // approach 2
+        let x: unknown = 'hello';
+        console.log((x as string).length);
+
+        // approach 3
+        let x: unknown = 'hello';
+        console.log((<string>x).length);
+
+        // approach 4: overcomes typechecking errors
+        let x = 'hello';
+        console.log(((x as unknown) as number).length); // x is not actually a number so this will return undefined
+
+
+> What is the equivalent to the type wildcard ? in Java
+
+    - any or unknown
+
+        let clientEx = ex as TRPCClientError<any>;
+        let clientEx = ex as TRPCClientError<unknown>;
+
+> What is the purposes of the ? and ?? operator:
+
+    - ?? can be used to supply a default value if a variable is null or undefined
+
+         const prettyPrint = options.prettyPrint ?? true; // default to true
+
+    - ? can be used on types and also if a return type of a method is eg User | null
+    - here file could be null and Typescript wont let you access the status field directly
+    - The ?. operator functions similarly to the . chaining operator, except that instead of causing an error if a reference is
+      nullish (null or undefined), the expression short-circuits with a return value of undefined
+
+         expect(file?.status).toEqual(FileStatus.COMPLETED);
+
+> How can you determine the type of a function which has no explicit return type:
+
+    - use ReturnType with the typeof the function - here appRouter.createCaller
+
+        let client: ReturnType<typeof appRouter.createCaller>;
+
+> What are 'type assertions'
+
+    - using "as" - be careful, it tells Typescript to trust you that you know the type
+    - if the type is wrong as per below, a runtime error is thrown!
+
+    let x:unknown = 99;
+    ((x as string)).trim()
 
 =================================================================================================================================================
 Union Types And Type Extension

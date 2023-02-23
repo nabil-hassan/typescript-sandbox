@@ -57,3 +57,29 @@ TYPE ANNOTATIONS
 
         let a1:string[]       = ["Bob", "Job", "Gob"]; 
         let a2:Array<String>  = ["Mob", "Sob"]; 
+
+6. What is 'Unknown' and how is it different from any:
+
+    - TypeScript 3.0 introduced a new unknown type which is the type-safe counterpart of the any type.
+
+    - The main difference between unknown and any is that unknown is much less permissive than any:
+      we have to do some form of checking before performing most operations on values of type unknown,
+      whereas we don't have to do any checks before performing operations on values of type any.
+
+    - The following would be possible using any, but are forbidden using unknown:
+
+        let value: unknown;
+        value.foo.bar; // Error - we can't trust it has those properties
+        value.trim(); // Error - we can't trust it has that method
+        value(); // Error - we can't trust it is a function
+
+    - The safest way to use unknowns is to type check them using typeof, instanceof and "if (x as type !== undefined)"
+    - See earlier notes for examples of type checking
+
+7. What are 'type assertions'
+
+    - using "as" - be careful, it tells Typescript to trust you that you know the type
+    - if the type is wrong as per below, a runtime error is thrown!
+
+    let x:unknown = 99;
+    ((x as string)).trim()

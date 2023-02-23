@@ -79,3 +79,5 @@ Importing and Exporting
         declare global {
             var prisma: PrismaClient | undefined;
         }
+
+    - Thus whenever you reference prisma in code it will pick it from global scope

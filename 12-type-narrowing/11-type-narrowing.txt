@@ -46,10 +46,27 @@ Type narrowing
 
 > How can you achieve the Java access via cast recipe ((Customer)c).getRegion()
 
-    - conditional access using instanceof
-    - here, data only exsists on a TRPCClientError
+        // approach 1    
+        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;      
 
-        let status = ex instanceof TRPCClientError ? ex.data.httpStatus : undefined;        
+        // approach 2
+        let x: unknown = 'hello';
+        console.log((x as string).length);          
+
+        // approach 3
+        let x: unknown = 'hello';
+        console.log((<string>x).length);
+
+        // approach 4: overcomes typechecking errors
+        let x = 'hello';
+        console.log(((x as unknown) as number).length); // x is not actually a number so this will return undefined
+
+> What is the equivalent to the type wildcard ? in Java
+
+    - any
+
+        let clientEx = ex as TRPCClientError<any>;
+
 
 > If a variable can have multiple types, how do you cast it
 
