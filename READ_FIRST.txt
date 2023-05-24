@@ -1,0 +1,51 @@
+
+=========================
+Types
+=========================
+
+- Read about type utilities for assisting with creating types:
+
+    https://www.typescriptlang.org/docs/handbook/utility-types.htm
+
+- use the ? operator if something could be null
+
+    customer?.age // returns the age or undefined if customer is undefined
+
+- use as to cast any literal to something
+
+    const conv = customer as Person;
+
+- know about type inference - you don't generally need to use type labels
+
+- use 'object' or unknown rather than any
+
+- see 11-type-narrowing section
+
+- For type intersections
+
+    // intersection - will have the properties of shape and additional property ‘sideLenght’
+    type Square = Shape & {
+      sideLength: number;
+    }
+
+    // alternate approach
+    type Event = {
+      name: string;
+      dateCreated: string;
+      type: string;
+    }
+
+    interface UserEvent extends Event {
+      UserId: string; 
+    }
+
+- For inline typing:
+
+    let testAccountRequest1: {
+      providerData?: string | undefined;
+      accountIdentifier: string;
+      advertiserId: string;
+      buyerId: string;
+      thirdPartyId: string;
+      name: string;
+    }
