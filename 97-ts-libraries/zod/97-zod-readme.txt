@@ -6,6 +6,10 @@ To run the example: npx ts-node zod.ts
 
 See aws sandbox s3 lambda project for advanced examples
 
+> To get corresponding type for a Zod schema field
+
+    type FishEnum = z.infer<typeof FishEnum>;
+
 > If you need to transform field names do it like this:
 
 const UserSchema = z.object({

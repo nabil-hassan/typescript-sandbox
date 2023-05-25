@@ -11,7 +11,7 @@ Types
 
     customer?.age // returns the age or undefined if customer is undefined
 
-- use as to cast any literal to something
+- use as to cast any literal to something and tell TS you are sure things are correct
 
     const conv = customer as Person;
 
