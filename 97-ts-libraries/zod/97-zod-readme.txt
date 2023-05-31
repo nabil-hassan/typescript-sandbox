@@ -38,6 +38,20 @@ console.log("MetaData: ", Metadata);
 const fileMetadata = RuleFileMetadata.parse(Metadata);
 
 ====================================================================================================================
+Composite Objects
+====================================================================================================================
+
+
+address: z.object({
+  addressLine1: z.string(),
+  addressLine2: z.string().optional(),
+  city: z.string(),
+  country: z.nativeEnum(CountryCode),
+  postalCode: z.string().optional(),
+  state: z.string(),
+}),
+
+====================================================================================================================
 Custom Error Messages
 ====================================================================================================================
 
