@@ -41,7 +41,6 @@ const fileMetadata = RuleFileMetadata.parse(Metadata);
 Composite Objects
 ====================================================================================================================
 
-
 address: z.object({
   addressLine1: z.string(),
   addressLine2: z.string().optional(),
