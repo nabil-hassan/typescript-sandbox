@@ -31,6 +31,44 @@ Importing and Exporting
         console.log(exportedFn());
         console.log(ExF());
 
+> What types of members can be exported and what is the syntax
+
+    export function funcName;   // for a function
+    export const variableName;  // for a variable
+
+> How can you export a member with a different name:
+
+    - use the export const = approach
+
+    const createAuthorizedContext = //.....
+
+    export const createContext = createAuthorizedContext;
+
+> How can you use spread with function exports
+
+    - Have a function that exports an object with a bunch of stuff
+
+          return {
+            router: t.router,
+            createAuthorizedContext,
+            authorizedProcedure: t.publicProcedure
+              .use(authMiddleware())
+              .use(authMetadataMiddleware((ctx) => ctx.authorization)),
+            paginatedProcedure: t.paginatedProcedure
+              .use(authMiddleware())
+              .use(authMetadataMiddleware((ctx) => ctx.authorization)),
+            publicProcedure: t.publicProcedure,
+          };
+
+    - Call this function and return selected pieces of it in some other file:
+
+        export const {
+          router,
+          createAuthorizedContext,
+          authorizedProcedure,
+          paginatedProcedure,
+        } = verifyAuthMetadata<Context>(createContext);
+
 
 > How do you export and import multiple members
 
