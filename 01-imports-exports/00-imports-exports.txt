@@ -35,6 +35,7 @@ Importing and Exporting
 
     export function funcName;   // for a function
     export const variableName;  // for a variable
+    export type/interface/class // for type, interface, class
 
 > How can you export a member with a different name:
 
