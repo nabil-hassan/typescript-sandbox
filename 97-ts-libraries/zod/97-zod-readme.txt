@@ -10,6 +10,17 @@ See aws sandbox s3 lambda project for advanced examples
 
     type FishEnum = z.infer<typeof FishEnum>;
 
+> NB if you are using transforms the type inference is a bit different - the below explains
+
+    const stringToNumber = z.string().transform((val) => val.length);
+
+    // Important: z.infer returns the OUTPUT type!
+    type input = z.input<typeof stringToNumber>; // string
+    type output = z.output<typeof stringToNumber>; // number
+
+    // equivalent to z.output!
+    type inferred = z.infer<typeof stringToNumber>; // number
+
 > If you need to transform field names do it like this:
 
 const UserSchema = z.object({
