@@ -11,13 +11,17 @@ Types
 
     customer?.age // returns the age or undefined if customer is undefined
 
+- use 'object' or unknown rather than any
+
+    if you use an object type for a variable, inference can be used (remember the Prisma where clause example)
+
 - use as to cast any literal to something and tell TS you are sure things are correct
 
     const conv = customer as Person;
 
 - know about type inference - you don't generally need to use type labels
 
-- use 'object' or unknown rather than any
+
 
 - see 11-type-narrowing section
 

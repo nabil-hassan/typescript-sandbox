@@ -10,6 +10,15 @@ To experiment with Typescript, refer to [the actual sandbox](the-sandbox) folder
 
 Also, create yourself an IntelliJ ts-node configuration following the guidelines [here](https://www.jetbrains.com/help/idea/running-and-debugging-typescript.html#ws_ts_run_debug_directly_ceate_node_config).
 
+NB for intellij make sure to install typescript and ts-node ON THE PROJECT ROOT.
+
+It won't work if you just install them in sub modules!!!
+
+```shell
+npm install ts-node --save-dev
+npm install typescript --save-dev
+```
+
 ### To install Typescript:
 
 ```shell
