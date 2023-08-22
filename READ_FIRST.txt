@@ -25,7 +25,14 @@ Types
 
 - know about type inference - you don't generally need to use type labels
 
+- functional interfaces/method references
 
+  In TS you can accept arguments similar to Java's Function, Consumer, Supplier and Runnable
+
+  function passCode(toRun: () => void)                    // runnable
+  function passCode(toConsume: (x:string) => void)        // consumer
+  function passCode(toFunction: (x:string) => string)     // function
+  function passCode(toSupply: () => string)               // supplier
 
 - see 11-type-narrowing section
 
