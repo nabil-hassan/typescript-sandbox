@@ -31,6 +31,10 @@ Importing and Exporting
         console.log(exportedFn());
         console.log(ExF());
 
+> How to import default and non-default members:
+
+  import React, {useState} from 'react';
+
 > What types of members can be exported and what is the syntax
 
     export function funcName;   // for a function
