@@ -1,9 +1,13 @@
-const aString:any = "Hello";
-const aStringArray:any = ["Hello", "World"];
-let y:any;
-let z:any = null;
+const foo:string = "Hello"
 
-console.log(aString as string);
-console.log(aStringArray as string);
-console.log(y as string);
-console.log(z as string);
+console.log(foo);
+
+type PnbErrorResponse = {
+  errors: Array<{
+    errorCode: string,
+    errorMessage: string
+  }>
+}
+
+const nonJson = "Test string";
+const json = JSON.stringify({name: "Nabil"});

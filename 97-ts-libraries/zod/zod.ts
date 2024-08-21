@@ -15,3 +15,5 @@ let rule = Rule.parse({
 });
 
 console.log(rule);
+
+let x = {name: 'jon', age: undefined};

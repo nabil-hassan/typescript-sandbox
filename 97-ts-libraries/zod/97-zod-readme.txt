@@ -2,6 +2,10 @@
 Zod
 ====================================================================================================================
 
+NB nullish is combination of optional AND nullable
+   optional means you can omit the field - but it cannot be null
+
+
 To run the example: npx ts-node zod.ts
 
 See aws sandbox s3 lambda project for advanced examples
@@ -9,6 +13,10 @@ See aws sandbox s3 lambda project for advanced examples
 > To get corresponding type for a Zod schema field
 
     type FishEnum = z.infer<typeof FishEnum>;
+
+> To get a Zod type from an existing complex type:
+
+    z.ZodType<Prisma.PostCreateInput>;
 
 > NB if you are using transforms the type inference is a bit different - the below explains
 

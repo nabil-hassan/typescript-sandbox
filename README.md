@@ -31,7 +31,7 @@ tsc --help
 The majority of the code in this project is structured as individual Typescript files, which can be compiled and run independently:
 
 ```shell
-tsc my_file.js
+tsc my_file.ts
 node my_file.js
 ```
 
@@ -49,6 +49,6 @@ npx ts-node src/script.ts
 
 ### To run Typescript as part of a Node project.
 
-Please see [the dedicated section](10-integrated-node-and-ts-project) on this.
+Please see [the dedicated section](99-integrated-node-and-ts-project) on this.
 
 
