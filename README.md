@@ -17,9 +17,26 @@ It won't work if you just install them in sub modules!!!
 ```shell
 npm install ts-node --save-dev
 npm install typescript --save-dev
+npm install --save-dev @types/nod
 ```
 
-### To install Typescript:
+You may also want to add a `tsconfig.json` file to your project root to configure the Typescript compiler. 
+
+An example of a minimal `tsconfig.json` file is as follows:
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "target": "es5"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["tests/**", "*.spec.ts", "*.test.js", "node_modules"]
+}
+```
+
+### To install Typescript globally (not recommended):
 
 ```shell
 npm install -g typescript
