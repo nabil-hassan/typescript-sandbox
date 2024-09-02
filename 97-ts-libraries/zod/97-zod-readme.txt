@@ -2,6 +2,36 @@
 Zod
 ====================================================================================================================
 
+NB You can use transform() on a Zod schema element like so - this is very handy for dynamic or unknown input
+
+    // example input - this should be an array but someone coded it like a map-type object with different keys
+    // "creatives": {
+    //     "2cf6148b-88c6-41f5-b1e9-33f41ff5eb72_313447004": {
+    //       "md5_checksum": "99f45be70eb760f7a2cf95c3088871a7",
+    //       "allow_as_padding": false,
+    //       "url": "http://localhost:3000/bsAdCopy/313447004/313447004_7800_verymalls.zip.x-html-package?playerId=396133686"
+    //     },
+    //     "3721fc0a-1336-4b87-8149-35f27c922a53_999999999": {
+    //       "md5_checksum": "21904b9876a98d71d8e9a1281313a023",
+    //       "allow_as_padding": false,
+    //       "url": "http://localhost:3000/bsAdCopy/999999999/999999999_7800_neighbours_1080x1920_v05.mp4?playerId=396133686"
+    //     },
+    //}
+    const creativesSchema = z.any().transform((o) => {
+      const map = new Map();
+      Object.keys(o).forEach((key) => {
+        map.set(key, CreativeSchema.parse(o[key]));
+      });
+      return map;
+    });
+
+    const externalPlaylistSchema = z.object({
+      playerId: z.string(),
+      creatives: creativesSchema,
+    });
+
+
+
 NB nullish is combination of optional AND nullable
    optional means you can omit the field - but it cannot be null
 

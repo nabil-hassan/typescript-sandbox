@@ -25,11 +25,7 @@ Type narrowing
 
           if (invoice instanceof SalesInvoices) {
 
-    - for a type however, you need to use this        
-
-        if (server.address() as AddressInfo !== undefined) {
-            // we can assume server.address() can be converted to AddressInfo    
-        }
+    - for a type however, you need to use a typeguard function - this sucks, so use Zod instead
 
     - or this appraoch using 'is':
 
